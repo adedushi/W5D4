@@ -9,6 +9,10 @@ class ShortenedUrl < ApplicationRecord
 
   belongs_to :submitter, class_name: :User
 
+  has_many :visits, 
+  through: :visitors,
+  source: :visitor
+  
   def self.random_code
     random_code = SecureRandom.urlsafe_base64(3)
     random_code = SecureRandom.urlsafe_base64(3) while exists?(short_url: random_code)
